@@ -23,8 +23,7 @@ resource "aws_instance" "web" {
 	user   = "ubuntu"
 	private_key = file("~/.ssh/test_aws.pem")
   }
-  
-  
+   
   provisioner "remote-exec" {
 	inline = [
 	  "sudo apt-get update -y && sudo apt-get install nginx -y && sudo service nginx start"
