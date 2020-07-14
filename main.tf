@@ -9,7 +9,7 @@ resource "aws_instance" "web" {
   availability_zone = "us-east-1a"
   vpc_security_group_ids = ["sg-00456591112e2ae54"]
   subnet_id = "subnet-045efcd1957a19688"
-  key_name = "test_win"
+  key_name = "test_aws"
 
   tags = {
       Name = var.master-name
@@ -21,13 +21,13 @@ resource "aws_instance" "web" {
     type = "ssh"
 	host   = self.public_ip
 	user   = "ubuntu"
-	private_key = file("/test_win.ppk")
+	private_key = file("~/.ssh/test_aws.pem")
   }
   
   
   provisioner "remote-exec" {
 	inline = [
-	  "sudo apt install nginx -y && sudo service nginx start"
+	  "sudo apt-get update -y && sudo apt-get install nginx -y && sudo service nginx start"
 	]
   }
   
