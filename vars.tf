@@ -1,3 +1,8 @@
+variable "master-name" {
+  type    = string
+  default = "example-master"
+}
+
 variable "slave-name" {
   type    = string
   default = "example-slave"
@@ -21,4 +26,9 @@ variable "nlb-listener" {
 variable "nlb-storage" {
   type    = string
   default = "example-storage"
+}
+
+variable "route-name" {
+  type    = string
+  default = ""
 }
