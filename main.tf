@@ -17,17 +17,18 @@ resource "aws_instance" "web" {
       Customer = "Trainning"
   }
   
+  connection {
+    type = "ssh"
+	host   = self.public_ip
+	user   = "ubuntu"
+	private_key = file("/test_win.ppk")
+  }
+  
+  
   provisioner "remote-exec" {
-  
-    connection {
-	  host 		  = self.public_ip
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("./test_win.ppk")
-    }
+	inline = [
+	  "sudo apt install nginx -y && sudo service nginx start"
+	]
   }
   
-  provisioner "local-exec" {
-    command = "apt install nginx && service nginx start"
-  }
 }
